@@ -1,0 +1,69 @@
+<!--<nav class="pagination">
+  <a href="#" class="pagination__item">1</a>
+</nav>
+-->
+<style type="text/css">
+.pagination a {
+	color: #000;
+	border: 0;
+	font-weight: normal;
+}
+.pagination a:hover {
+	color: #277cea;
+	border: 0;
+	font-weight: normal;
+}
+.pagination a:active {
+	color: #277cea;
+	border: 0;
+	font-weight: normal;
+}
+.pagination a:focus {
+	color: #277cea;
+	border: 0;
+	font-weight: normal;
+}
+.pagination {
+	width: 190px;
+	text-align:center;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 0;
+	margin-bottom: 2rem;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+	font: 1rem; 
+	color: #cccdce;
+}
+.pagination_all {
+	width: 100%;
+}
+</style>
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination_all">
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&nbsp;Previous &nbsp;</a>
+  {% else %}
+    <span>&nbsp;Previous</span>
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <span>&nbsp; {{ page }} &nbsp;</span>
+    {% elsif page == 1 %}
+      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"> {{ page }} </a>
+    {% else %}
+      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}"> {{ page }} </a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"> &nbsp; Next </a>
+  {% else %}
+    <span> &nbsp; Next </span>
+  {% endif %}
+</div>
+</div>
+{% endif %}
