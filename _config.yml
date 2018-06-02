@@ -5,7 +5,7 @@ author: timeforplanb # You :P
 description: > 
  | networking | linux | project management | programming | blog
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://network.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://netdotwork.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 # SEO PLUGIN
 social:
   name: timeforplanb
