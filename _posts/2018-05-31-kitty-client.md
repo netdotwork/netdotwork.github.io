@@ -89,7 +89,7 @@ KittyPath=C:\soft\kitty.exe
 ```
 Теперь, чтобы перенести настройки из реестра запустим KiTTY с ключем
 ```
-kitty.exe -convert-dir`. 
+kitty.exe -convert-dir
 ```
 Заходим в директорию, где лежит KiTTY и пишем в адресной строке `cmd`
 
