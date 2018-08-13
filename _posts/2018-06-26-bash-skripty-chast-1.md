@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bash-скрипты. Часть 1
-summary: Существуют разные командные оболочки, zhs, ksh, tcsh, но мы будем учить bash. Последовательно. Разбавляя теорию практикой.
+summary: Существуют разные командные оболочки, zsh, ksh, tcsh, но мы будем учить bash. Последовательно. Разбавляя теорию практикой.
 featured-img: bashscripts
 categories: Linux Code Notes
 tags: [ bash ]
