@@ -56,59 +56,59 @@ tags: [ bash ]
 #!/bin/bash
 IFS=$'\n' # разделители полей по умолчанию: пробел, табуляция, перенос строки; выбираем перенос строки
 
-# новое, добавленное устройство (flash) будет последним в выводе df; выводим заголовок (первая строка df -h) и информацию о флешке (последняя строка df -h)
-	for flash in $(df -h) # в переменную flash будет записана целая строка
+# новое, добавленное устройство (flash) будет последним в выводе df; выводим заголовок (первая строка df -h) и информацию об устройстве (последняя строка df -h)
+	for flash in $(df -h) # поместим последнюю строку из вывода df -h в переменную flash
 		do
-		for title in $(df -h) # в переменную title успеет записаться только первая строка, потом сразу break из цикла
+		for title in $(df -h) # поместим первую строку из вывода df -h в переменную title
 			do
-			break # выход из цикла
+			break # за счет остановки цикла в переменную title будет добавлена только первая строка из вывода df -h 
 		done
-		sleep 0 # ничего не делаем
+		sleep 0 # не делаем ничего, спим 0 секунд
 	done
-echo "Dude, perhaps, it's your flash: " # не, ну, чувак, может быть, ты после флешки еще какой-то девайс подключил, поэтому здесь perhaps...
+echo "Dude, perhaps, it's your flash: " # выводим последнее подключенное внешнее устройство (первая и последняя строка df -h)
 echo $title # вывод первой строки df -h
 echo $flash # вывод последней строки df -h
 
-IFS=' ' # возвращаем пробел как разделитель полей (как царицу полей!)
+IFS=' ' # меняем разделитель полей на пробел
 
-#помещаем в переменную flashfilesystem полный путь до директории, куда примонтировалась флешка
+#помещаем в переменную flashfilesystem полный путь до директории, в которую смонтирована flash
 	for flashfilesystem in $flash 
 		do
-		sleep 0 # спим 0 секунд
+		sleep 0 # не делаем ничего, спим 0 секунд
 	done
-# проверяем, есть ли в корне флешки директория Music, MUSIC, да хоть mUsIc (а то на всяких плеерах есть ;0)
-	flashwithmusic=$(find $flashfilesystem -maxdepth 1 -name "[Mm][Uu][Ss][Ii][Cc]*" -print) # опция -maxdepth 1 говорит, что не нужно find'у лезть в подкаталоги
-	if [ $flashwithmusic ] # если каталог music есть, то и славно; flashwithmusic = путь до каталога music на флешке
+# проверяем, есть ли в корне устройства директория Music, MUSIC, да хоть mUsIc, с помощью регулярного выражения
+	flashwithmusic=$(find $flashfilesystem -maxdepth 1 -name "[Mm][Uu][Ss][Ii][Cc]*" -print) # опция -maxdepth 1 указывает, что find не будет проверять поддиректории
+	if [ $flashwithmusic ] # если каталог music есть, то записываем во flashwithmusic путь до каталога music на устройстве
 		then
 		sleep 0
 	else
-		flashwithmusic=$flashfilesystem # если каталога music нет, то предложим пользователю залить в корень; flashwithmusic = путь до корня флешки
+		flashwithmusic=$flashfilesystem # если каталога music нет, то предложим пользователю копировать в корень устройства; flashwithmusic = путь до корня flash
 	fi
 	
-# спросим пользователя, хочет ли он использовать найденный ранее каталог на флешке
-	read -p "Dude! Can I copy your new music to this directory ($flashwithmusic)? (yes or no): " yourchoice # запишем ответ пользователя в переменную yourchoice
+# спросим пользователя, хочет ли он использовать найденный ранее на устройстве каталог
+	read -p "Dude! Can I copy your new music to this directory ($flashwithmusic)? (yes or no): " yourchoice # записываем ответ пользователя в переменную yourchoice
 	if [ $yourchoice = 'yes' ] # проверяем ответ на yes
 		then
-		IFS=$'\n' # снова разделитель полей = перенос строки
-			for newmusic in $(find ~/Downloads/ -mtime -1 -type f -print) # для ответа yes находим в каталоге ~/Downloads/ файлы не старее 1 суток
+		IFS=$'\n' # установим разделителем полей перенос строки
+			for newmusic in $(find ~/Downloads/ -mtime -1 -type f -print) # в случае ответа yes находим в каталоге ~/Downloads/ файлы не старее 1 суток
 				do
 				echo "Copying..." 
 				cp $newmusic $flashwithmusic # копируем найденное из ~/Downloads/ в наш каталог с музыкой
 			done 
-			echo "Enjoy your new music, Dude!" # да, чувак! Рейв!
+			echo "Enjoy your new music, Dude!" # Готово!
 		else 
-		read -p "Sorry, Dude! Could you write a directory to copy?: " yourchoice # для ответа no или любого отличающегося от yes, предлагаем ввести полный путь до места
-			if [ -d $yourchoice ] # проверяем, каталог ли нам подсунули?
+		read -p "Sorry, Dude! Could you write a directory to copy?: " yourchoice # для ответа no или любого отличающегося от yes, предложим ввести полный путь до директории
+			if [ -d $yourchoice ] # проверяем указанный путь (директория или нет)
 			then
 			IFS=$'\n'
 				for newmusic in $(find ~/Downloads/ -mtime -1 -type f -print)
 				do
 				echo "Copying..."
-				cp $newmusic $yourchoice # копируем найденное из ~/Downloads/ в указанный пользователем каталог
+				cp $newmusic $yourchoice # копируем найденное из ~/Downloads/ в указанную пользователем директорию
 				done 
-				echo "Enjoy your new music, Dude!" # да, чувак! Рейв!
+				echo "Enjoy your new music, Dude!" # Готово!
 			else
-				echo "Dude! It's not correct directory!" # не, чувак! То, что ты ввел - не директория. Не рейв, чувак!
+				echo "Dude! It's not correct directory!" # выводим сообщение о том, что введенный путь не является директорией
 			fi
 	fi
 ```
