@@ -46,11 +46,11 @@ device.close()
 
 Теперь переходим в netbox, добавляем платформу:
 
-Devices - Platforms - ADD - называем Huawei VRP, в поле NAPALM driver указываем ce.
+*Devices - Platforms - ADD - называем Huawei VRP, в поле NAPALM driver указываем ce.*
 
 Создаем устройство и привязываем платформу:
 
-Devices - ADD - в поле Platform выбираем Huawei VRP. Здесь же нужно выбрать Primary IPv4, который используется для управления.
+*Devices - ADD - в поле Platform выбираем Huawei VRP. Здесь же нужно выбрать Primary IPv4, который используется для управления.*
 
 После этого можем взглянуть как выглядит запрос через rest api netbox. Открываем в браузере:
 http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors,
@@ -64,10 +64,10 @@ get_lldp_neighbors - один из доступных в ce методов.
 
 В карточке устройства теперь доступны вкладки Status, LLDP Neighbors, Configuration, но у нас не Huawei CE, поэтому информации либо нет, либо она некорректная. Поправим это:
 
-у меня netbox на Ubuntu, поэтому переходим в /usr/local/lib/python3.6/dist-packages/napalm_ce, открываем ce.py. Здесь все парсеры cli-выводов Huawei CE.
+у меня netbox на Ubuntu, поэтому переходим в */usr/local/lib/python3.6/dist-packages/napalm_ce*, открываем ce.py. Здесь все парсеры cli-выводов Huawei CE.
 
 Оригинальный ce.py можно открыть, например, [здесь](https://github.com/napalm-automation-community/napalm-ce/blob/master/napalm_ce/ce.py){:target="_blank"}. Дальше будет только исправленный код.
-Для начала исправим вывод метода get_lldp_neighbors:
+Для начала исправим вывод метода *get_lldp_neighbors*:
 
 ```
 def get_lldp_neighbors(self):
