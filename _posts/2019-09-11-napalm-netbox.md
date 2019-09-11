@@ -20,10 +20,11 @@ https://github.com/netbox-community
 Дело в том, что сам драйвер представляет из себя универсальный API для управления "коробками" любых вендоров. А как управлять - решаете сами. Например, хотите написать парсер для чего-то своего или добавить новый метод, переписываете только одну библиотеку в директории custom_napalm. Вот здесь подробнее - https://napalm.readthedocs.io/en/latest/tutorials/extend_driver.html.
 
 Итак, на странице коммьюнити есть почти то, что нужно - [napalm_ce](https://github.com/napalm-automation-community/napalm-ce){:target="_blank"}. Это драйвер для huawei cloudengine. Установим согласно инструкции, проверим на девайсах серий S и NE. Актуально и для других серий (CX, Eudemon, USG):
-через установщик python-пакетов, pip ([pip - The Python Package Installer](https://pip.pypa.io/en/stable/)):
+через установщик python-пакетов, pip ([pip - The Python Package Installer](https://pip.pypa.io/en/stable/){:target="_blank"}):
+
 `pip install napalm-ce`
 
-Сейчас napalm будет корректно работать только с Huawei CE. Проверим по инструкции на странице проекта -  [README.md](https://github.com/napalm-automation-community/napalm-ce/blob/master/):
+Сейчас napalm будет корректно работать только с Huawei CE. Проверим по инструкции на странице проекта -  [README.md](https://github.com/napalm-automation-community/napalm-ce/blob/master/){:target="_blank"}:
 выбираем любой доступный на странице метод, например, get_lldp_neighbors()
 
 ```
@@ -37,18 +38,22 @@ device.get_lldp_neighbors()
 device.close()
 ```
 
-Все, что относится к optional_args можно изучить [здесь](https://napalm.readthedocs.io/en/latest/support/#optional-arguments)
+Все, что относится к optional_args можно изучить [здесь](https://napalm.readthedocs.io/en/latest/support/#optional-arguments){:target="_blank"}
 
 Разумеется, на устройствах должен быть включен lldp. Если нет, включаем глобально на huawei:
+
 `lldp enable`
 
 Теперь переходим в netbox, добавляем платформу:
+
 Devices - Platforms - ADD - называем Huawei VRP, в поле NAPALM driver указываем ce.
+
 Создаем устройство и привязываем платформу:
+
 Devices - ADD - в поле Platform выбираем Huawei VRP. Здесь же нужно выбрать Primary IPv4, который используется для управления.
 
 После этого можем взглянуть как выглядит запрос через rest api netbox. Открываем в браузере:
-http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors
+http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors,
 где
 ```
 netbox.domain - ip-адрес сервера, где хостим netbox,
@@ -56,9 +61,12 @@ netbox.domain - ip-адрес сервера, где хостим netbox,
 get_lldp_neighbors - один из доступных в ce методов.
 ```
 Интерфейсы в карточке устройства должны совпадать с этим выводом, т.е. для NE, например, так - GigabitEthernet4/1/21, а для S-серии, например, так - GE3/0/1.
+
 В карточке устройства теперь доступны вкладки Status, LLDP Neighbors, Configuration, но у нас не Huawei CE, поэтому информации либо нет, либо она некорректная. Поправим это:
+
 у меня netbox на Ubuntu, поэтому переходим в /usr/local/lib/python3.6/dist-packages/napalm_ce, открываем ce.py. Здесь все парсеры cli-выводов Huawei CE.
-Оригинальный ce.py можно открыть, например, [здесь](https://github.com/napalm-automation-community/napalm-ce/blob/master/napalm_ce/ce.py). Дальше будет только исправленный код.
+
+Оригинальный ce.py можно открыть, например, [здесь](https://github.com/napalm-automation-community/napalm-ce/blob/master/napalm_ce/ce.py){:target="_blank"}. Дальше будет только исправленный код.
 Для начала исправим вывод метода get_lldp_neighbors:
 
 ```
@@ -72,7 +80,7 @@ def get_lldp_neighbors(self):
         for neighbor in match:
             local_iface = neighbor[0]
             if local_iface not in results:
-               results[local_iface] = []
+            results[local_iface] = []
                
             neighbor_dict = dict()
             neighbor_dict['hostname'] = py23_compat.text_type(neighbor[1])
@@ -147,5 +155,7 @@ http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors и �
 Это не все, но уже стало гораздо интереснее. Теперь netbox - не только IPAM + DCIM, но и, даже, немного OSS.
 
 Полезные ссылки
-[Adding Cisco IOS support to NAPALM (Network Automation and Programmability Abstraction Layer with Multivendor support)](https://projectme10.wordpress.com/2015/12/07/adding-cisco-ios-support-to-napalm-network-automation-and-programmability-abstraction-layer-with-multivendor-support/])
-[Accessing NAPALM via the NetBox API](https://www.youtube.com/watch?v=ha2kNRiO_Ng&t=389s)
+
+[Adding Cisco IOS support to NAPALM (Network Automation and Programmability Abstraction Layer with Multivendor support)](https://projectme10.wordpress.com/2015/12/07/adding-cisco-ios-support-to-napalm-network-automation-and-programmability-abstraction-layer-with-multivendor-support/]){:target="_blank"}
+
+[Accessing NAPALM via the NetBox API](https://www.youtube.com/watch?v=ha2kNRiO_Ng&t=389s){:target="_blank"}
