@@ -156,6 +156,6 @@ http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors и �
 
 Полезные ссылки
 
-[Adding Cisco IOS support to NAPALM (Network Automation and Programmability Abstraction Layer with Multivendor support)](https://projectme10.wordpress.com/2015/12/07/adding-cisco-ios-support-to-napalm-network-automation-and-programmability-abstraction-layer-with-multivendor-support/]){:target="_blank"}
+[Adding Cisco IOS support to NAPALM (Network Automation and Programmability Abstraction Layer with Multivendor support)](https://projectme10.wordpress.com/2015/12/07/adding-cisco-ios-support-to-napalm-network-automation-and-programmability-abstraction-layer-with-multivendor-support/){:target="_blank"}
 
 [Accessing NAPALM via the NetBox API](https://www.youtube.com/watch?v=ha2kNRiO_Ng&t=389s){:target="_blank"}
