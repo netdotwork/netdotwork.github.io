@@ -89,7 +89,11 @@ def get_lldp_neighbors(self):
         return results
 ```
 Проверяем корректность вывода так:
-http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors и на странице устройства, на вкладке LLDP Neighbors. Выглядит это, например, так:
+
+http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors
+
+и на странице устройства, на вкладке LLDP Neighbors. Выглядит это, например, так:
+
 ![lldp_neighbors]({{ site.url }}{{ site.baseurl }}/assets/img/posts/lldp_neighbors.png)
 
 Теперь поправим вкладку Configuration, добавим вывод Startup config:
