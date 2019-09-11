@@ -70,12 +70,12 @@ def get_lldp_neighbors(self):
         for neighbor in match:
             local_iface = neighbor[0]
             if local_iface not in results:
-                results[local_iface] = []
-
+               results[local_iface] = []
+               
             neighbor_dict = dict()
             neighbor_dict['hostname'] = py23_compat.text_type(neighbor[1])
             neighbor_dict['port'] = py23_compat.text_type(neighbor[2])
-results[local_iface].append(neighbor_dict)
+        results[local_iface].append(neighbor_dict)
         return results
 ```
 Проверяем корректность вывода так:
@@ -114,12 +114,12 @@ http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors и �
             if 'VRP (R) software' in line:
                 search_result = re.search(r"\((?P<serial_number1>[NSE]\S+)\s+(?P<os_version>V\S+)\)", line)
                 if search_result is not None:
-                   os_version = search_result.group('os_version')
+                os_version = search_result.group('os_version')
 
             if 'uptime is' in line:
                 search_result = re.search(r"[HQ]\S+\s+\S+\s+", line)
                 if search_result is not None:
-                    model = search_result.group(0)
+                model = search_result.group(0)
                 uptime = self._parse_uptime(line)
                 break
 
