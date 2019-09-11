@@ -6,6 +6,8 @@ featured-img: typewriter
 categories: Other Networking Code
 tags: [ netbox, napalm ]
 ---
+Очень добрый инструмент учета, netbox, можно сделать еще добрее. Сегодня прикрутим napalm driver к netbox и соберем данные с оборудования huawei.
+
 Netbox - бесплатный, открытый IPAM + DCIM. Вот ссылочки: https://netbox.readthedocs.io/en/stable/
 https://github.com/netbox-community
 
@@ -17,7 +19,7 @@ https://github.com/netbox-community
 Посмотрим гитхаб коммьюнити - https://github.com/napalm-automation-community. 
 Дело в том, что сам драйвер представляет из себя универсальный API для управления "коробками" любых вендоров. А как управлять - решаете сами. Например, хотите написать парсер для чего-то своего или добавить новый метод, переписываете только одну библиотеку в директории custom_napalm. Вот здесь подробнее - https://napalm.readthedocs.io/en/latest/tutorials/extend_driver.html.
 
-Итак, на странице коммьюнити есть почти то, что нужно - [napalm_ce](https://github.com/napalm-automation-community/napalm-ce). Это драйвер для huawei cloudengine. Установим согласно инструкции, проверим на девайсах серий S и NE. Актуально и для других серий (CX, Eudemon, USG):
+Итак, на странице коммьюнити есть почти то, что нужно - [napalm_ce](https://github.com/napalm-automation-community/napalm-ce){:target="_blank"}. Это драйвер для huawei cloudengine. Установим согласно инструкции, проверим на девайсах серий S и NE. Актуально и для других серий (CX, Eudemon, USG):
 через установщик python-пакетов, pip ([pip - The Python Package Installer](https://pip.pypa.io/en/stable/)):
 `pip install napalm-ce`
 
@@ -80,7 +82,7 @@ def get_lldp_neighbors(self):
 ```
 Проверяем корректность вывода так:
 http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors и на странице устройства, на вкладке LLDP Neighbors. Выглядит это, например, так:
-![lldp_neighbors] (https://netdotwork.github.io/assets/img/posts/netbox_napalm_driver/lldp_neighbors.png)
+![lldp_neighbors]({{ site.url }}{{ site.baseurl }}/assets/img/posts/netbox_napalm_driver/lldp_neighbors.png)
 
 Теперь поправим вкладку Configuration, добавим вывод Startup config:
 ```
