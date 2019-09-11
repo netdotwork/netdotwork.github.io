@@ -24,7 +24,7 @@ https://github.com/netbox-community
 
 `pip install napalm-ce`
 
-Сейчас napalm будет корректно работать только с Huawei CE. Проверим по инструкции на странице проекта -  [README.md](https://github.com/napalm-automation-community/napalm-ce/blob/master/){:target="_blank"}:
+Сейчас napalm будет корректно работать только с Huawei CE. Проверим по инструкции на странице проекта -  [README.md](https://github.com/napalm-automation-community/napalm-ce/blob/master/README.md){:target="_blank"}:
 выбираем любой доступный на странице метод, например, get_lldp_neighbors()
 
 ```
