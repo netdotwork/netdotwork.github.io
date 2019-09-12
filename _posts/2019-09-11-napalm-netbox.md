@@ -71,22 +71,20 @@ get_lldp_neighbors - один из доступных в ce методов.
 
 ```
 def get_lldp_neighbors(self):
-
-        results = {}
-        command = 'display lldp neighbor brief'
-        output = self.device.send_command(command)
-        re_lldp = r"(?P<local>\S+)\s+(?P<hostname>\S+)\s+(?P<port>\S+)\s+\d+\s+"
-        match = re.findall(re_lldp, output, re.M)
-        for neighbor in match:
-            local_iface = neighbor[0]
-            if local_iface not in results:
-            results[local_iface] = []
-               
-            neighbor_dict = dict()
-            neighbor_dict['hostname'] = py23_compat.text_type(neighbor[1])
-            neighbor_dict['port'] = py23_compat.text_type(neighbor[2])
-        results[local_iface].append(neighbor_dict)
-        return results
+  results = {}
+  command = 'display lldp neighbor brief'
+  output = self.device.send_command(command)
+  re_lldp = r"(?P<local>\S+)\s+(?P<hostname>\S+)\s+(?P<port>\S+)\s+\d+\s+"
+  match = re.findall(re_lldp, output, re.M)
+      for neighbor in match:
+      local_iface = neighbor[0]
+      if local_iface not in results:
+      results[local_iface] = []
+neighbor_dict = dict()
+neighbor_dict['hostname'] = py23_compat.text_type(neighbor[1])
+neighbor_dict['port'] = py23_compat.text_type(neighbor[2])
+results[local_iface].append(neighbor_dict)
+return results
 ```
 Проверяем корректность вывода так:
 
@@ -98,44 +96,44 @@ http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors
 
 Теперь поправим вкладку Configuration, добавим вывод Startup config:
 ```
-    def get_config(self, retrieve='all'):
-        if retrieve.lower() in ('running', 'all'):
-            command = 'display current-configuration all'
-            config['running'] = py23_compat.text_type(self.device.send_command(command))
-        if retrieve.lower() in ('startup', 'all'):
-            command = 'display saved-configuration last'
-            config['startup'] = py23_compat.text_type(self.device.send_command(command))
-            pass
-        return config
+def get_config(self, retrieve='all'):
+    if retrieve.lower() in ('running', 'all'):
+       command = 'display current-configuration all'
+       config['running'] = py23_compat.text_type(self.device.send_command(command))
+    if retrieve.lower() in ('startup', 'all'):
+       command = 'display saved-configuration last'
+       config['startup'] = py23_compat.text_type(self.device.send_command(command))
+       pass
+       return config
 ```
 
 На вкладке Status заполним поля Model, Serial Number, OS Version, Uptime:
 ```
-    def get_facts(self):
-        # default values.
-        vendor = u'Huawei'
-        uptime = -1
-        serial_number, fqdn, os_version, hostname, model = (u'Unknown', u'Unknown', u'Unknown', u'Unknown', u'Unknow$
+def get_facts(self):
+    # default values.
+    vendor = u'Huawei'
+    uptime = -1
+    serial_number, fqdn, os_version, hostname, model = (u'Unknown', u'Unknown', u'Unknown', u'Unknown', u'Unknow$
 
-        # obtain output from device
-        show_ver = self.device.send_command('display version')
-        show_hostname = self.device.send_command('display current-configuration | inc sysname')
-        show_int_status = self.device.send_command('display interface brief')
-        show_esn = self.device.send_command('display esn')
+    # obtain output from device
+    show_ver = self.device.send_command('display version')
+    show_hostname = self.device.send_command('display current-configuration | inc sysname')
+    show_int_status = self.device.send_command('display interface brief')
+    show_esn = self.device.send_command('display esn')
 
-        # serial_number/VRP version/uptime/model
-        for line in show_ver.splitlines():
-            if 'VRP (R) software' in line:
-                search_result = re.search(r"\((?P<serial_number1>[NSE]\S+)\s+(?P<os_version>V\S+)\)", line)
-                if search_result is not None:
-                os_version = search_result.group('os_version')
+    # serial_number/VRP version/uptime/model
+    for line in show_ver.splitlines():
+        if 'VRP (R) software' in line:
+           search_result = re.search(r"\((?P<serial_number1>[NSE]\S+)\s+(?P<os_version>V\S+)\)", line)
+        if search_result is not None:
+           os_version = search_result.group('os_version')
 
-            if 'uptime is' in line:
-                search_result = re.search(r"[HQ]\S+\s+\S+\s+", line)
-                if search_result is not None:
-                model = search_result.group(0)
-                uptime = self._parse_uptime(line)
-                break
+        if 'uptime is' in line:
+           search_result = re.search(r"[HQ]\S+\s+\S+\s+", line)
+        if search_result is not None:
+           model = search_result.group(0)
+           uptime = self._parse_uptime(line)
+           break
 
         if 'sysname ' in show_hostname:
             _, hostname = show_hostname.split("sysname ")
@@ -158,7 +156,7 @@ http://netbox.domain/api/dcim/devices/119/napalm/?method=get_lldp_neighbors
 
 Это не все, но уже стало гораздо интереснее. Теперь netbox - не только IPAM + DCIM, но и, даже, немного OSS.
 
-Полезные ссылки
+Полезные ссылки:
 
 [Adding Cisco IOS support to NAPALM (Network Automation and Programmability Abstraction Layer with Multivendor support)](https://projectme10.wordpress.com/2015/12/07/adding-cisco-ios-support-to-napalm-network-automation-and-programmability-abstraction-layer-with-multivendor-support/){:target="_blank"}
 
