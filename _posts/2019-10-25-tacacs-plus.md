@@ -69,7 +69,7 @@ nano /etc/fstab
 
 `/dev/sda3       /var/log/tac_plus  ext4    defaults        1 2`
 
-`moutn -a`
+`mount -a`
 
 #### Обычный tacacs
 
