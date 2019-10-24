@@ -86,8 +86,11 @@ nano /etc/fstab
 `ps -e | grep tac`
 
 Прежде чем открыть конфиг, пара основных терминов:
+
 **NAS (network access server)** - сетевое устройство, к которому мы будем подключаться через tacacs
+
 **NAC (network access client)** - хосты, с которых мы будем подключаться к сетевому оборудованию
+
 **AV (attribute-value) **- пара аттрибут - значение, которые передаются между клиентом и сервером tacacs. Например, privilege level или default ftp-directory.
 
 Теперь откроем конфиг:
