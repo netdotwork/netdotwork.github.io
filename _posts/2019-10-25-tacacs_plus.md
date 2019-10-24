@@ -6,6 +6,7 @@ featured-img: typewriter
 categories: Other Networking Linux
 tags: [ tacacs, huawei ]
 ---
+
 Настроим TACACS+, добавим аутентификацию через ldap, подготовим профили авторизации и аккаунтинг, изучим возможности сервера. Развернем всё это на Ubuntu 19.04, а в качестве сетевого будет Huawei: S, NE, Eudemon (USG).
 
 Почему tacacs+, а не, например, radius?
@@ -35,7 +36,7 @@ Radius позволяет управлять авторизацией тольк
 
 Мы будем складывать данные аккаунтинга на наш локальный сервер (хотя можно, например, в syslog, а можно в базу данных, а затем на мониторинг, но об этом попозже). Используем обычные разделы, выделим и примонтируем отдельный раздел для аккаунтинга и настроим ротацию создаваемых логов:
 - Выделим место (например, в вашей vmware)
-- Проверим на сервере:
+- Проверим на сервере (далее все команды будем выполнять из по root):
 
 `fdisk -l`
 
@@ -48,6 +49,7 @@ Radius позволяет управлять авторизацией тольк
 `fdisk /dev/sda` (можно использовать более простой cfdisk /dev/sda)
 
 m - вызавть справку по коммандам fdisk
+
 n - создать новый раздел (создаем sda3 на все 34Gb)
 Раздел создали, теперь форматируем в ext4:
 
@@ -95,6 +97,7 @@ nano /etc/fstab
 Сейчас пара полезных ссылок с примерами конфигураций:
 
 [раз](https://itsketch.ru/linux/ubuntu/16-ubuntu-tacacs-server){:target="_blank"}
+
 [два](http://www.techspacekh.com/configuring-tacacs-plus-with-tacacs-plus-user-authentication-on-rhelcentos-7/){:target="_blank"}
 
 И, конечно же, если какие-то вопросы решить не получается, всегда читайте man:
@@ -210,7 +213,9 @@ user = test {
 Теперь скачиваем пакет, вот этот - [DEVEL.201908261951.tar.bz2](http://www.pro-bono-publico.de/projects/src/DEVEL.tar.bz2){:target="_blank"}
 
 Теперь пара ссылок на официальную документацию.
+
 [Здесь общий список проектов от разработчика](http://www.pro-bono-publico.de/projects/){:target="_blank"}
+
 [Здесь Mini-HowTo, как установить и протестировать работу tac_plus](http://www.pro-bono-publico.de/projects/howto-tac_plus-ads.html){:target="_blank"}
 
 Продолжим, распакуем архив и установим необходимые пакеты:
@@ -240,8 +245,10 @@ make install
 
 Перед тем, как начнем править конфиг, пара очень полезных ссылок по теме:
 
-[оифциальная документация](http://www.pro-bono-publico.de/projects/tac_plus.html#AEN383){:target="_blank"}. Здесь есть примеры простых конфигураций. Самая полезная ссылка.
+[официальная документация](http://www.pro-bono-publico.de/projects/tac_plus.html#AEN383){:target="_blank"}. Здесь есть примеры простых конфигураций. Самая полезная ссылка.
+
 [habr](https://habr.com/ru/post/194750/){:target="_blank"} - статья на хабре с примером конфигурации и комментариями.
+
 [пример настройки](https://itsketch.ru/linux/ubuntu/83-tacacs-na-linux-s-domennoj-avtorizatsiej){:target="_blank"}
 
 Правим конфиг. Приведу пример файла конфигурации, в комментариях, что и как работает, а еще то, что включить лично у меня не получилось:
@@ -469,6 +476,7 @@ user = local_user {
 
 Теперь добавим учетки на LDAP-сервере.
 *Средства администрирования - Пользователи и компьютеры.*
+
 Для начала создадим технологическую учетную запись для mavis:
 *действие - создать - пользователь. На вкладке "Учетная запись" ставим галочки "Запретить смену пароля пользователем", "Срок действия пароля не ограничен"*
 
@@ -682,28 +690,40 @@ journalctl -u tac_unit
 
 ##### Полезные ссылки:
 ###### Автозагрузка в Linux:
+
 [раз](https://losst.ru/avtozagruzka-linux){:target="_blank"}
+
 ###### Управление службами Linux в systemd:
+
 [раз](https://losst.ru/upravlenie-sluzhbami-linux){:target="_blank"}
 
 ###### Делаем systemd-unit:
+
 [раз](https://habr.com/ru/company/southbridge/blog/255845/){:target="_blank"}
+
 [два](https://www.shellhacks.com/ru/systemd-service-file-example/){:target="_blank"}
+
 [три](https://oss-it.ru/171){:target="_blank"}
+
 [четыре](https://linux-notes.org/pishem-systemd-unit-fajl/){:target="_blank"}
 
 ###### Делаем sysv init-скрипт:
+
 [раз](https://linux-notes.org/pishem-init-skript/){:target="_blank"}
 
 ###### Документация:
 ###### update.rc.d для работы с автозагрузкой в sysv:
+
 [раз](http://manpages.ylsoftware.com/ru/update-rc.d.8.html){:target="_blank"}
+
 ###### systemd.service:
+
 [раз](https://www.freedesktop.org/software/systemd/man/systemd.service.html){:target="_blank"}
 
 `man systemd.service`
 
 ###### systemd.unit:
+
 [раз](https://www.freedesktop.org/software/systemd/man/systemd.unit.html){:target="_blank"}
 
 `man systemd.unit`
@@ -712,7 +732,9 @@ journalctl -u tac_unit
 
 Настроим history и время на сервере, чтобы было удобнее работать на сервере:
 - Открываем файл с настройками работы в терминале:
+
 `nano ~/.bashrc`
+
 - Добавляем в конец файла строчки:
 
 ```
@@ -723,7 +745,7 @@ export HISTTIMEFORMAT='%F %T ' # добавить в вывод history штам
 
 - Перечитываем конфигурацию bash:
 
-`sudo exec bash`
+`exec bash`
 
 - Установим время
 
