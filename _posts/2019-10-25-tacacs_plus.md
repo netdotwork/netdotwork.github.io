@@ -1,12 +1,11 @@
 ---
 layout: post
-title: Tacacs+LDAP+huawei
+title: Tacacs+ LDAP + huawei
 summary: Настроим TACACS+, аутентификацию через ldap. Развернем это на Ubuntu 19.04, а в качестве сетевого будет Huawei: S, NE, Eudemon (USG).
-featured-img: typewriter
+featured-img: kittyonkeyboard
 categories: Other Networking Linux
 tags: [ tacacs, huawei ]
 ---
-
 Настроим TACACS+, добавим аутентификацию через ldap, подготовим профили авторизации и аккаунтинг, изучим возможности сервера. Развернем всё это на Ubuntu 19.04, а в качестве сетевого будет Huawei: S, NE, Eudemon (USG).
 
 Почему tacacs+, а не, например, radius?
