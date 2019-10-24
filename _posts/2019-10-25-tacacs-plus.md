@@ -92,7 +92,7 @@ nano /etc/fstab
 
 **NAC (network access client)** - хосты, с которых мы будем подключаться к сетевому оборудованию
 
-**AV (attribute-value) **- пара аттрибут - значение, которые передаются между клиентом и сервером tacacs. Например, privilege level или default ftp-directory.
+**AV (attribute-value)** - пара аттрибут - значение, которые передаются между клиентом и сервером tacacs. Например, privilege level или default ftp-directory.
 
 Теперь откроем конфиг:
 
