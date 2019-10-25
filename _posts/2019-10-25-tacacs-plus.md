@@ -31,7 +31,7 @@ Radius позволяет управлять авторизацией тольк
 
 ![tacacs-authorization]({{ site.url }}{{ site.baseurl }}/assets/img/posts/tacacs/tacacs-authorization.png)
 
-#### Общее
+## Общее
 
 В ААА последняя буква - это accounting. Лучше заранее подумать, куда будем складывать информацию о том, кто, когда и куда получил доступ и какие действия на оборудовании были выполнены.
 Если разворачиваете новый сервер, то лучше использовать LVM для распределения места на диске, сможете быстро менять размер томов при нехватке места. Вообще, для серверов, которые постоянно создают какие-то данные, лучше держать LVM и предусмотреть ротацию этих данных.
@@ -72,7 +72,7 @@ nano /etc/fstab
 
 `mount -a`
 
-#### Обычный tacacs
+## Обычный tacacs
 
 Развернем tacacs из стандартных репозиториев. Здесь не будет аутентификации через LDAP (если нужен LDAP, то пропускаем этот раздел и переходим к следующему. Для работы с LDAP потребуется установить другой пакет).
 Обновляем индекс и устанавливаем пакет:
@@ -196,7 +196,7 @@ user = test {
 
 Обе комманды нужно вводить из под пользователя, которому нужно установить пароль.
 
-#### Tacacs+ с аутентификацией через LDAP
+## Tacacs+ с аутентификацией через LDAP
 
 А есть, значит, другой tacacs, тот что поддерживает аутентификацию через PAM, LDAP, Radius, списки доступа для NAC, NAS, гибкое управление группами, большое кол-во регулярок и возможность управлять авторизацией с помощью скриптов.
 Если ранее был установлен обычный tacacs+, то теперь его можно смело удалить:
@@ -518,7 +518,7 @@ chown root:root /etc/init.d/tac_plus
 /etc/init.d/tac_plus start
 ```
 
-#### Дебаг
+## Дебаг
 
 Проверим, что сервис слушает 49 порт:
 
@@ -539,7 +539,7 @@ tcpdump -nn port 49 -w ~/dump.cap # с записью в файл
 
 [Debugging](http://www.pro-bono-publico.de/projects/tac_plus.html#AEN2594){:target="_blank"}
 
-#### Предусмотрим автозагрузку
+## Предусмотрим автозагрузку
 
 Конечно, можно стартовать сервис классическими */etc/init.d/tac_plus start* и */etc/init.d/tac_plus stop*, но, подразумевается, что после рестарта системы сервис поднимется автоматически.
 Начнем с того, что Ubuntu 19.04, как и большинство современных дистрибутивов Linux, используют подсистему инициализации systemd, которая очень неплохо работает с init-скриптами, написанными для более старой подсистемы sysv.
@@ -693,16 +693,16 @@ journalctl -u tac_plus
 journalctl -u tac_unit
 ```
 
-##### Полезные ссылки:
-###### Автозагрузка в Linux:
+### Полезные ссылки:
+#### Автозагрузка в Linux:
 
 [раз](https://losst.ru/avtozagruzka-linux){:target="_blank"}
 
-###### Управление службами Linux в systemd:
+#### Управление службами Linux в systemd:
 
 [раз](https://losst.ru/upravlenie-sluzhbami-linux){:target="_blank"}
 
-###### Делаем systemd-unit:
+#### Делаем systemd-unit:
 
 [раз](https://habr.com/ru/company/southbridge/blog/255845/){:target="_blank"}
 
@@ -712,28 +712,28 @@ journalctl -u tac_unit
 
 [четыре](https://linux-notes.org/pishem-systemd-unit-fajl/){:target="_blank"}
 
-###### Делаем sysv init-скрипт:
+#### Делаем sysv init-скрипт:
 
 [раз](https://linux-notes.org/pishem-init-skript/){:target="_blank"}
 
-###### Документация:
-###### update.rc.d для работы с автозагрузкой в sysv:
+#### Документация:
+#### update.rc.d для работы с автозагрузкой в sysv:
 
 [раз](http://manpages.ylsoftware.com/ru/update-rc.d.8.html){:target="_blank"}
 
-###### systemd.service:
+#### systemd.service:
 
 [раз](https://www.freedesktop.org/software/systemd/man/systemd.service.html){:target="_blank"}
 
 `man systemd.service`
 
-###### systemd.unit:
+#### systemd.unit:
 
 [раз](https://www.freedesktop.org/software/systemd/man/systemd.unit.html){:target="_blank"}
 
 `man systemd.unit`
 
-#### Еще немного
+## Еще немного
 
 Настроим history и время на сервере, чтобы было удобнее работать на сервере:
 - Открываем файл с настройками работы в терминале:
@@ -766,8 +766,8 @@ export HISTTIMEFORMAT='%F %T ' # добавить в вывод history штам
 
 `date`
 
-#### Шаблоны для оборудования huawei
-###### Для коммутаторов S33, S53, S93:
+## Шаблоны для оборудования huawei
+#### Для коммутаторов S33, S53, S93:
 ```
 system-view
 ssh authentication-type default password
@@ -813,7 +813,7 @@ save
 y
 ```
 
-###### Для CX, ATN, NE:
+#### Для CX, ATN, NE:
 ```
 system-view
  ssh authentication-type default password
@@ -861,7 +861,7 @@ save
 y
 ```
 
-###### Для firewall Eudemon, USG (здесь обязательно заводить юзеров локально):
+#### Для firewall Eudemon, USG (здесь обязательно заводить юзеров локально):
 ```
 sy
 hwtacacs-server template <hwtacacs_template_name>
