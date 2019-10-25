@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tacacs + LDAP + huawei
-summary:  Это - Jekyll, и здесь пишут на Markdown. Markdown - это язык разметки, он простой, многое из того, что вы читаете в интернете, написано с помощью него. Форматирование слов жирным или курсивом, добавление изображений и создание списков-это малая чась того, что может Markdown. После написания Markdown преобразуется в язык для публикаций (тот же html)
+summary:  Настроим TACACS+, добавим аутентификацию через ldap, подготовим профили авторизации и аккаунтинг, изучим возможности сервера. Развернем всё это на Ubuntu 19.04, а в качестве сетевого будет Huawei (S, NE, CX, ATN, Eudemon (USG)).
 featured-img: kittyonkeyboard
 categories: Linux Networking
 tags: [ huawei, tacacs+ ]
