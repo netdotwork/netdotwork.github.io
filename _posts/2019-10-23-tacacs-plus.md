@@ -286,6 +286,7 @@ id = tac_plus {
 # указываем имя домена. Например, если ваш домен your.domain, то будет так
   setenv LDAP_BASE = "DC=your,DC=domain"
   setenv LDAP_SCOPE = sub
+# парсим по всем пользователям в AD
   setenv LDAP_FILTER = "(&(objectClass=user)(objectClass=person)(sAMAccountName=%s))"
 # техонологическая учетка в AD, которую будет использовать mavis. Саму учетку создадим чуть позже.
   setenv LDAP_USER = "tacacsplus@your.domain"
@@ -488,7 +489,7 @@ user = local_user {
 
 В Active Directory создаем группы, которые указали в файле конфигурации: tacacs_admin, tacacs_backbone, tacacs_helpdesk.
 Tac Plus отрезает префикс «tacacs» при соотношении группы, указанной в AD, группе в конфиге и переводит оставшиеся символы в верхний регистр.
-Таким образом, например, группе tacacsadmin будет соответвствовать ADMIN, а tacacsabckbone - BAKCBONE (мы же изменили данное поведение, указав атрибуты: AD_GROUP_PREFIX и REQUIRE_TACACS_GROUP_PREFIX в конфиге. Теперь можно создавать группы по с названиями аналогичными файлу конфигурации).
+Таким образом, например, группе tacacsadmin будет соответвствовать ADMIN, а tacacsabckbone - BACKBONE (мы же изменили данное поведение, указав атрибуты: AD_GROUP_PREFIX и REQUIRE_TACACS_GROUP_PREFIX в конфиге. Теперь можно создавать группы по с названиями аналогичными файлу конфигурации).
 По этой же причине группы указаны в конфиге большими буквами, и это не случайно.
 
 Теперь проверим конфиг на ошибки:
