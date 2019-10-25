@@ -5,7 +5,6 @@ summary: Настроим TACACS+, аутентификацию через ldap.
 featured-img: kittyonkeyboard
 categories: Linux Networking
 tags: [ huawei, tacacs+ ]
-
 ---
 Настроим TACACS+, добавим аутентификацию через ldap, подготовим профили авторизации и аккаунтинг, изучим возможности сервера. Развернем всё это на Ubuntu 19.04, а в качестве сетевого будет Huawei: S, NE, Eudemon (USG).
 
