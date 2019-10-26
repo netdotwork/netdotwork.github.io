@@ -124,7 +124,7 @@ user = test {
      member = guest
      login = des CAjOONkQeROwy
 }
-# по умолчанию, для гурппы guest запретим всё, кроме отдельно взятых команд
+# по умолчанию, для группы guest запретим всё, кроме отдельно взятых команд
 group = guest {
      default service = deny
      service = exec {
@@ -291,7 +291,7 @@ id = tac_plus {
 # техонологическая учетка в AD, которую будет использовать mavis. Саму учетку создадим чуть позже.
   setenv LDAP_USER = "tacacsplus@your.domain"
 # пароль от технологической учетки
-  setenv LDAP_PASSWD = "HwO19N4px"
+  setenv LDAP_PASSWD = "tacacsplus_password"
 # снимаем ограничение с групп в AD
   setenv UNLIMIT_AD_GROUP_MEMBERSHIP = 1
   setenv EXPAND_AD_GROUP_MEMBERSHIP = 0
@@ -330,7 +330,7 @@ host = backbone {
 # указываем список NAS ip вашего backbone. Пример:
   address = Y.Y.Y.Y/24,Z.Z.Z.Z
 # можно указать в виде файла
-# address file = /home/tacacs/addresses.cidr
+# address file = ~/addresses.cidr
 # дальше по аналогии со списком world
   welcome banner = "Welcome. Today is %A. \n"
   prompt = "Your actions are recording...\n"
@@ -429,7 +429,7 @@ script = {
 }
 group = TACACS_HELPDESK {
 # можно прикрутить права другой группы, просто в качестве примера:
-# member = tacacs_admin
+# member = TACACS_ADMIN
   message = "your text"
   default service = deny
   acl = nacacl
