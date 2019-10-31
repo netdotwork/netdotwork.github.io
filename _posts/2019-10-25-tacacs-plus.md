@@ -86,19 +86,19 @@ nano /etc/fstab
 `nano /etc/logrotate.d/tacacs`
 
 ```
-/var/log/nxtt_tac_plus/access/*.txt* {
+/var/log/tac_plus/access/*.txt* {
         daily
         missingok
         rotate 365
 }
 
-/var/log/nxtt_tac_plus/accounting/*.txt* {
+/var/log/tac_plus/accounting/*.txt* {
         daily
         missingok
         rotate 365
 }
 
-/var/log/nxtt_tac_plus/authentication/*.txt* {
+/var/log/tac_plus/authentication/*.txt* {
         daily
         missingok
         rotate 365
