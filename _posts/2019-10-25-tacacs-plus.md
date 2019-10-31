@@ -71,6 +71,51 @@ nano /etc/fstab
 
 `mount -a`
 
+Теперь настроим ротацию с помощью logrotate:
+
+1) установим утилиту:
+
+`apt update && apt install logrotate`
+
+2) создадем новый конфигурационный файл для ротации в /etc/logrotate.d/. Этот файл уже будет выполняться ежедневно по cron:
+
+`touch tacacs`
+
+Внесем настройки:
+
+`nano /etc/logrotate.d/tacacs`
+
+```
+/var/log/nxtt_tac_plus/access/*.txt* {
+        daily
+        missingok
+        rotate 365
+}
+
+/var/log/nxtt_tac_plus/accounting/*.txt* {
+        daily
+        missingok
+        rotate 365
+}
+
+/var/log/nxtt_tac_plus/authentication/*.txt* {
+        daily
+        missingok
+        rotate 365
+}
+```
+
+`daily` - выполнить ротацию ежедневно.
+
+`missingok` - не выдавать ошибки, если отсутствуют файлы для ротации
+
+`rotate` - кол-во логов, которые оставляем после каждой ротации
+
+Т.е. будем ежедневно проверять содержимое директорий, оставлять последние 365 файлов, остальные удалять.
+У Logrotate много параметров, и утилиту можно использовать не только для логов:
+
+`man logrotate`
+
 ## Обычный tacacs
 
 Развернем tacacs из стандартных репозиториев. Здесь не будет аутентификации через LDAP (если нужен LDAP, то пропускаем этот раздел и переходим к следующему. Для работы с LDAP потребуется установить другой пакет).
