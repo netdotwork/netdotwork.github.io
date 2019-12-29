@@ -54,7 +54,6 @@ NE40E, NE5000E, NE9000, CE, CX, USG6000V.
 isis 1
  is-level level-2
  cost-style wide # по умолчанию, narrow, от 1 до 63. Для построения LSP MPLS TE и передаче tag, нужно переключиться на wide
- flash-flood level-2 # ускоряем сходимость, увеличивая число LSP-флуда
  bfd all-interfaces enable # включаем динамические bfd для ISIS
  bfd all-interfaces min-tx-interval 100 min-rx-interval 100
  auto-cost enable # заставляет пересчитать метрику на ISIS-интерфейсах при изменении (например, с narrow на wide)
@@ -72,7 +71,6 @@ isis 1
 isis 2
  is-level level-2
  cost-style wide
- flash-flood level-2
  bfd all-interfaces enable
  bfd all-interfaces min-tx-interval 100 min-rx-interval 100
  auto-cost enable
@@ -87,7 +85,6 @@ isis 2
 isis 3
  is-level level-2
  cost-style wide
- flash-flood level-2
  bfd all-interfaces enable
  bfd all-interfaces min-tx-interval 100 min-rx-interval 100
  auto-cost enable
@@ -108,7 +105,6 @@ mpls lsr-id 10.1.0.1 # обязательно для работы MPLS
 mpls
  mpls te
  mpls te auto-frr  # работу frr можно увидеть, запустив команду - display mpls te tunnel-interface auto-bypass-tunnel
- mpls te auto-frr reoptimization # раз в час запускается автоматическая реоптимизация LSP для bypass-туннелей. Работает в комплекте с mpls te auto-frr
  mpls rsvp-te
  mpls te bfd enable # включим динамические bfd
  mpls rsvp-te bfd all-interfaces enable
@@ -213,7 +209,6 @@ ip address unnumbered interface LoopBack0 # используем source-адре
 destination 10.1.0.2
 mpls te tunnel-id 1111 # произвольный id
 mpls te commit # разрешаем изменения
-statistic enable # включаем сбор статистики
 mpls te path explicit-path main # указываем основной путь для туннеля
 mpls te path explicit-path backup secondary # указываем резервный путь для туннеля
 mpls te backup hot-standby mode revertive wtr 30 # время переключения на основной LSP после восстановления
