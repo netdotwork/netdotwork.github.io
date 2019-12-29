@@ -14,9 +14,9 @@ tags: [ huawei, mpls, vpls ]
 2. Логинимся на сервер по ssh:
 - открываем /etc/vmware/config
 - добавляем vhv.enable = “TRUE”
-Это всё. [Здесь](http://sojoudian.net/2017/12/07/enable-nested-virtualization-in-vmware-esxi-6/) побольше информации.
+Это всё. [Здесь](http://sojoudian.net/2017/12/07/enable-nested-virtualization-in-vmware-esxi-6/){:target="_blank"} побольше информации.
 
-Устанавливаем eNSP, ищем на https://support.huawei.com/ (потребуется учетная запись с правами загрузки продуктов Huawei).
+Устанавливаем eNSP, ищем на [https://support.huawei.com/](https://support.huawei.com/){:target="_blank"} (потребуется учетная запись с правами загрузки продуктов Huawei).
 Здесь же находим образы для eNSP. Сейчас есть для следующих устройств:
 NE40E, NE5000E, NE9000, CE, CX, USG6000V.
 
