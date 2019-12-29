@@ -2,6 +2,7 @@
 layout: post
 title: Backup'им huawei
 summary:  воспользуемся средствами VRP и U2000. Напишем ротацию на bash.
+featured-img: kittyonkeyboard
 categories: Linux Networking Code
 tags: [ huawei, backup, bash ]
 ---
