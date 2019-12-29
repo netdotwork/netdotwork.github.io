@@ -65,7 +65,7 @@ isis 1
   loop-free-alternate level-2
 ```
 
-По аналогии настроим еще 2 ISIS instance (ISIS area = instance number):
+По аналогии настроим еще 2 ISIS instance:
 
 ```
 isis 2
