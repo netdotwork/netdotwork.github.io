@@ -66,7 +66,7 @@ done
 
 Добавляем скрипту права на исполнение:
 ```
-hcmod +x rotationscript.sh
+chmod +x rotationscript.sh
 ```
 
 Добавляем в /etc/crontab для выполнения в указанное время (ежедневно в 00:50):
