@@ -109,11 +109,6 @@ mpls
  mpls te bfd enable # включим динамические bfd
  mpls rsvp-te bfd all-interfaces enable
  mpls rsvp-te bfd all-interfaces min-tx-interval 100 min-rx-interval 100
- mpls rsvp-te hello # включим механизм соседства в RSVP
- mpls rsvp-te hello support-peer-gr
- mpls rsvp-te hello nodeid-session 10.1.0.2 # разрешим поддерживать соседство в RSVP TE
- mpls rsvp-te hello nodeid-session 10.10.0.1
- mpls rsvp-te hello nodeid-session 10.10.0.2
  mpls te cspf # включаем механизм CSPF
  lsp-trigger all # для построения LSP берем как статические, так и IGP-маршруты
 ```
@@ -131,7 +126,6 @@ interface Ethernet1/0/0
  mpls te
  mpls te auto-frr self-adapting # недостаточно глобально включить auto-frr для MPLS TE, необходимо добавить настройку на интерфейс
  mpls rsvp-te
- mpls rsvp-te hello # по умолчанию, в TE не устанавливается соседство и не отправляются hello
 #
 interface Ethernet1/0/0.2
  vlan-type dot1q 2
@@ -143,7 +137,6 @@ interface Ethernet1/0/0.2
  mpls te
  mpls te auto-frr self-adapting
  mpls rsvp-te
- mpls rsvp-te hello
 #
 interface Ethernet1/0/0.3
  vlan-type dot1q 3
@@ -155,7 +148,6 @@ interface Ethernet1/0/0.3
  mpls te
  mpls te auto-frr self-adapting
  mpls rsvp-te
- mpls rsvp-te hello
 ```
 
 ## 1. Транспортный LSP для VPLS
