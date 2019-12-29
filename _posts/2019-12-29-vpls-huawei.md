@@ -7,6 +7,8 @@ categories: Networking Notes
 tags: [ huawei, mpls, vpls ]
 ---
 
+Пособираем VPLS-сервисы на Huawei. Martini VPLS, HVPLS, Kompella VPLS, Mixed. В качестве IGP будет ISIS, а в качестве транспорта - RSVP-TE. Для стенда - eNSP.
+
 #### Не по теме
 
 У меня есть старенький сервер с VMware ESXi, 6.0.0, есть виртуальная машина с Windows 10. Развернем на ней eNSP. eNSP использует VirtualBox, поэтому потребуется возможность запускать виртуальные машины внутри вирутальной машины. Это Nested virtualization, и в VMware существует давно. Включается так:
