@@ -1,6 +1,6 @@
 ---
 layout: post
-title: VPLS over MPLS TE на huawei
+title: VPLS over MPLS TE huawei
 summary: Пособираем VPLS-сервисы на Huawei. Martini VPLS, HVPLS, Kompella VPLS, Mixed. В качестве IGP будет ISIS, а в качестве транспорта - RSVP-TE. Для стенда - eNSP.
 featured-img: kittyonkeyboard
 categories: Networking Notes
