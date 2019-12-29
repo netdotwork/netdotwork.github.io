@@ -7,7 +7,9 @@ categories: Linux Networking Code
 tags: [ huawei, backup, bash ]
 ---
 
-#### 1. Из коробки
+Будем backup'ить huawei средствами VRP и U2000. Напишем ротацию на bash.
+
+## 1. Из коробки
 
 Huawei умеет бэкапить конфигурацию "из коробки". Делается это так:
 set save-configuration
@@ -75,7 +77,7 @@ hcmod +x rotationscript.sh
 
 Скрипт будет выполнять ротацию ежедневно, оставляя для каждого устройства не более 7 файлов конфигурации. Хотя файлы конфигурации и небольшие, можно добавить ротацию для файлов, которые хранятся больше 365 дней. Поможет атрибут -mtime 365 для find
 
-#### 2. Из U2000
+## 2. Из U2000
 
 Настроим U2000 для сохранения файлов конфигурации на удаленный sftp-сервер.
 - Administration > Settings > FTP Account Information Management > Configure FTP Account > создаем account для доступа к удаленному sftp-серверу.
