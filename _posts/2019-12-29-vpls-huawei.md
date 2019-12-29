@@ -1,6 +1,6 @@
 ---
 layout: post
-title: VPLS на Huawei
+title: VPLS на huawei
 summary: Пособираем VPLS-сервисы на Huawei. Martini VPLS, HVPLS, Kompella VPLS, Mixed. В качестве IGP будет ISIS, а в качестве транспорта - RSVP-TE. Для стенда - eNSP.
 featured-img: kittyonkeyboard
 categories: Networking Notes
@@ -36,7 +36,7 @@ NE40E, NE5000E, NE9000, CE, CX, USG6000V.
 
 **Что и с чем будем объединять через L2:**
 
-![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/vpls_services.png)
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/vpls_services.jpg)
 
 **Принципы распространения трафика в VPLS:**
 
@@ -210,12 +210,11 @@ mpls te fast-reroute # включаем механизм FRR для мгнове
 ip address unnumbered interface LoopBack0 # используем source-адрес на Loo0-интерфейсе
 destination 10.1.0.2
 mpls te tunnel-id 1111 # произвольный id
-mpls te reoptimization # благодаря этой команде RSVP будет периодически проверять, не появился ли лучший LSP и переключаться на него (интервал по умолчанию - 3600 секунд). Данный механизм всегда можно запустить вручную командой mpls te reoptimization
 mpls te commit # разрешаем изменения
 statistic enable # включаем сбор статистики
 mpls te path explicit-path main # указываем основной путь для туннеля
 mpls te path explicit-path backup secondary # указываем резервный путь для туннеля
-mpls te backup hot-standby mode revertive wtr 60 # время переключения на основной LSP после восстановления
+mpls te backup hot-standby mode revertive wtr 30 # время переключения на основной LSP после восстановления
 mpls te backup ordinary best-effort # будем пытататься строить best effort LSP только если основной и резервный LSP будут не доступны
 mpls te backup hot-standby overlap-path # основной и резервный LSP могут частитчно пересекаться
 mpls te backup frr-in-use # разрешаем механизм FRR при переключении на резервный LSP
