@@ -55,12 +55,10 @@ isis 1
  flash-flood level-2 # ускоряем сходимость, увеличивая число LSP-флуда
  bfd all-interfaces enable # включаем динамические bfd для ISIS
  bfd all-interfaces min-tx-interval 100 min-rx-interval 100
- bandwidth-reference 100000 # влияет на Interface cost = (Bandwidth-reference/Interface bandwidth) x 10 - расчет метрики при установленном bandwidth-reference. Например, 100 000 / 100 (Mb/s) * 10 = 10 000
- auto-cost enable # тесно связана с предыдущей командой. Добавив compatible можно изменить предыдущую формулу. Заставляет пересчитать метрику на ISIS-интерфейсах при изменении (например, с narrow на wide)
+ auto-cost enable # заставляет пересчитать метрику на ISIS-интерфейсах при изменении (например, с narrow на wide)
  network-entity 49.0001.0100.0100.0001.00 # net-заголовок для ISIS
  is-name agg-1
  traffic-eng level-2 # включаем поддержку TE
- set-overload on-startup # самый лучший в мире бит, позволяющий тесно работать, например, в паре с BGP
  frr # ну и добавим механизм быстрого перестроения routing table для ISIS
   loop-free-alternate level-1
   loop-free-alternate level-2
@@ -75,13 +73,11 @@ isis 2
  flash-flood level-2
  bfd all-interfaces enable
  bfd all-interfaces min-tx-interval 100 min-rx-interval 100
- bandwidth-reference 100000
  auto-cost enable
  network-entity 49.0002.0100.0100.0001.00
  is-name agg-1
  import-route direct route-policy loopback0-isis # политику описывать не буду, но мы импортируем адреса Lo0 из isis1, так будет удобнее
  traffic-eng level-2
- set-overload on-startup
  frr
   loop-free-alternate level-1
   loop-free-alternate level-2
@@ -92,13 +88,11 @@ isis 3
  flash-flood level-2
  bfd all-interfaces enable
  bfd all-interfaces min-tx-interval 100 min-rx-interval 100
- bandwidth-reference 100000
  auto-cost enable
  network-entity 49.0003.0100.0100.0001.00
  is-name agg-1
  import-route direct tag 3 route-policy loopback0-isis
  traffic-eng level-2
- set-overload on-startup
  frr
   loop-free-alternate level-1
   loop-free-alternate level-2
