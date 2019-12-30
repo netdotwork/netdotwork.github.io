@@ -46,17 +46,17 @@ NE40E, NE5000E, NE9000, CE, CX, USG6000V.
 
 Схема в eNSP будет выглядеть так (здесь подписаны интерфейсы и уже добавлены хосты):
 
-![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/kompella_bgp_update.jpg)
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/vpls_domain1.jpg)
 
 **Принципы распространения трафика в VPLS:**
 
 картинки показывают только VPLS Data Plane, т.е. передачу пользовательского трафика на устройстве-участнике VPLS домена. И это важно.
 
-AC - attached circuit, пользовательский интерфейс на PE-устройстве, принадлежит определенному vsi.
+**AC** - attached circuit, пользовательский интерфейс на PE-устройстве, принадлежит определенному vsi.
 
-VSI - virtual switching instance, виртуальный коммутатор на PE, VPLS-домен. На Cisco - VFI.
+**VSI** - virtual switching instance, виртуальный коммутатор на PE, VPLS-домен. На Cisco - VFI.
 
-PW - pseudowire, сервисный туннель или виртуальный провод между PE.
+**PW** - pseudowire, сервисный туннель или виртуальный провод между PE.
 
 ![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/pw1.png)
 
@@ -482,7 +482,7 @@ bgp 65001
 Здесь адрес Next hop - адрес соседа передающего сервисную метку для vsi test, настроенного ранее.
 В секции NLRI (Network layer reachability information) видим блок меток для расчета уникальной сервисной метки (для того же vsi test)
 
-Подключим хосты, проверим работу vpls-сегмента (уже знаеомая картинка из eNSP):
+Подключим хосты, проверим работу vpls-сегмента (уже знакомая картинка из eNSP):
 
 ![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/vpls_domain1.jpg)
 
