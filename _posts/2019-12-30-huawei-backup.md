@@ -12,9 +12,12 @@ tags: [ huawei, backup, bash ]
 ## 1. Из коробки
 
 Huawei умеет бэкапить конфигурацию "из коробки". Делается это так:
+
+```
 set save-configuration
 set save-configuration interval 720 delay 60
 set save-configuration backup-to-server server X.X.X.X transport-type ftp user user_name password user_password path path_to_backup_files
+```
 
 Первой командой включаем функцию сохранения конфигурации.
 Теперь VRP будет периодически проверять конфигурационный файл и выполнять автосохранение только, если зафиксирует изменения. Да, сохраняться конфигурационный файл, сперва, будет на flash-память устройства. Без этого никак.
