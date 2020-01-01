@@ -1,13 +1,13 @@
 ---
 layout: post
 title: VPLS over MPLS TE huawei
-summary: Пособираем VPLS-сервисы на Huawei. Kompella VPLS, Martini H-VPLS, Mixed. В качестве IGP будет ISIS, а в качестве транспорта - RSVP-TE. Для стенда - eNSP.
+summary: Пособираем VPLS-сервисы на Huawei. Kompella VPLS, Kompella VPLS + Martini H-VPLS (Mixed). В качестве IGP будет ISIS, а в качестве транспорта - RSVP-TE. Для стенда - eNSP.
 featured-img: kittyonkeyboard
 categories: Networking Notes
 tags: [ huawei, mpls, vpls ]
 ---
 
-Пособираем VPLS-сервисы на Huawei. Здесь будет Kompella VPLS, Martini H-VPLS и Mixed. В качестве IGP - ISIS, а в качестве транспорта - RSVP-TE. Стенд соберём в eNSP.
+Пособираем VPLS-сервисы на Huawei. Здесь будет Kompella VPLS, Kompella VPLS + Martini H-VPLS (Mixed). В качестве IGP - ISIS, а в качестве транспорта - RSVP-TE. Стенд соберём в eNSP.
 
 ## Не по теме
 
