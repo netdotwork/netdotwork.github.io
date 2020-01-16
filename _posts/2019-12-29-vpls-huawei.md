@@ -61,7 +61,7 @@ NE40E, NE5000E, NE9000, CE, CX, USG6000V.
 
 ![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/huawei_vpls/pw3.png)
 
-**Подготовим ISIS и разрвенем RSVP-TE (актуально для каждого устройства):**
+**Подготовим ISIS и развернем RSVP-TE (актуально для каждого устройства):**
 
 ```
 isis 1
