@@ -355,6 +355,8 @@ bgp 65001 # произвольный as-number из "серого" диапаз�
   peer 10.10.0.2 group RR-2
  #
  l2vpn-ad-family # настроим family для Kompella VPLS
+  reflector cluster-id 65001 # формируем RR-кластер из agg-1 и agg-2, так было задумано
+  reflect change-path-attribute # разрешаем изменять BGP-аттрибуты на RR
   policy vpn-target # разрешаем фильтрацию vpn-маршрутов в BGP (аналогично включается и для других family, например vpnv4)
   peer 10.10.0.1 enable
   peer 10.10.0.1 signaling vpls # включаем BGP signaling для работы Kompella VPLS
@@ -410,6 +412,8 @@ bgp 65001
   peer 10.10.0.2 group RR-2
  #
  l2vpn-ad-family
+  reflector cluster-id 65001
+  reflect change-path-attribute
   policy vpn-target
   peer 10.10.0.1 enable
   peer 10.10.0.1 signaling vpls
@@ -460,6 +464,8 @@ bgp 65001
   peer 10.1.0.2 group RR-1
  #
  l2vpn-ad-family
+  reflector cluster-id 65002 # формируем RR-кластер из agg-3 и agg-4, все по схеме
+  reflect change-path-attribute
   policy vpn-target
   peer 10.1.0.1 enable
   peer 10.1.0.1 signaling vpls
@@ -772,6 +778,8 @@ vsi test1
   peer 10.2.0.1 group ACCESS_1
  #
  l2vpn-ad-family
+  reflector cluster-id 65001 # RR-кластер из agg-1 и agg-2, всё согласно схеме
+  reflect change-path-attribute
   policy vpn-target
   peer ACCESS_1 enable
   peer ACCESS_1 signaling vpls
@@ -827,6 +835,8 @@ vsi test1
   peer 10.2.0.1 group ACCESS_1
  #
  l2vpn-ad-family
+  reflector cluster-id 65001 # RR-кластер из agg-1 и agg-2, всё согласно схеме
+  reflect change-path-attribute
   policy vpn-target
   peer ACCESS_1 enable
   peer ACCESS_1 signaling vpls
@@ -990,6 +1000,8 @@ bgp 65001
   peer 10.2.0.2 group ACCESS_1
  #
  l2vpn-ad-family
+  reflector cluster-id 65001 # RR-кластер из agg-1 и agg-2, всё согласно схеме
+  reflect change-path-attribute
   policy vpn-target
   peer ACCESS_1 enable
   peer ACCESS_1 reflect-client
@@ -1031,6 +1043,8 @@ bgp 65001
   peer 10.2.0.2 group ACCESS_1
  #
  l2vpn-ad-family
+  reflector cluster-id 65001 # RR-кластер из agg-1 и agg-2, всё согласно схеме
+  reflect change-path-attribute
   policy vpn-target
   peer ACCESS_1 enable
   peer ACCESS_1 reflect-client
