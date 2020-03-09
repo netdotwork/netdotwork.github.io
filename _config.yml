@@ -2,7 +2,7 @@
 title: net.work
 # your site title
 author: timeforplanb # You :P
-description: > 
+description: >
  | networking | linux | project management | programming | blog
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://netdotwork.github.io" # the base hostname & protocol for your site, e.g. http://example.com
@@ -24,8 +24,8 @@ navigation: # Navigation links
   - {name: 'Code', link: '/code'}
   - {name: 'Networking', link: '/networking'}
   - {name: 'Management', link: '/management'}
-  - {name: 'About', link: '/about'}
-  - {name: 'Contact', link: '/contact'}
+#  - {name: 'About', link: '/about'}
+#  - {name: 'Contact', link: '/contact'}
 
 #  tagline: >
 #  Modern Jekyll theme focused on speed performance &amp; SEO best practices
@@ -38,7 +38,7 @@ twitter_username: timeforplanb1  # replace with your_twitter_username or comment
 github_username:  netdotwork  # replace with your_github_username or comment to remove link from footer
 instagram_username: __timeforplanb # replace with your_instagram_username or comment to remove link from footer
 #facebook_username: # replace with your_facebook_username or comment to remove link from footer
-googleplus_username: 116393668939937207464 # replace with your_googleplus_username or comment to remove link from footer
+#googleplus_username: 116393668939937207464 # replace with your_googleplus_username or comment to remove link from footer
 
 disqus:
   shortname: net-work # to enable comments replace with your_disqus_shortname
@@ -63,7 +63,7 @@ exclude:
   - npm-debug.log
   - gulpfile.js
   - sleek.jpg
-  
+
 incremental: true
 
 include: ['_pages']

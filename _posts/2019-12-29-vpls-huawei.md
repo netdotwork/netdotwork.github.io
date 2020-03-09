@@ -2,7 +2,7 @@
 layout: post
 title: VPLS over MPLS TE huawei
 summary: Пособираем VPLS-сервисы на Huawei. Kompella VPLS, Kompella VPLS + Martini H-VPLS (Mixed). В качестве IGP будет ISIS, а в качестве транспорта - RSVP-TE. Для стенда - eNSP.
-featured-img: kittyonkeyboard
+featured-img:
 categories: Networking Notes
 tags: [ huawei, mpls, vpls ]
 ---
@@ -222,7 +222,7 @@ mpls te backup hot-standby overlap-path # основной и резервный
 mpls te backup frr-in-use # разрешаем механизм FRR при переключении на резервный LSP
 ```
 
-**Теперь, Affinity:** 
+**Теперь, Affinity:**
 
 здесь кратко. С помощью этого механизма можно разрешать или запрещать определенные типы LSP через интерфейс.
 Типы LSP могут быть такими: HSB+PR, HSB only, BE+HSB+PR и т.п. Каждый тип принадлежит административной группе, от номера которой зависит какие типы туннелей разрешены или запрещены при прохождении через интерфейс. Выглядит так:
@@ -584,7 +584,7 @@ display vsi test verbose
     Local VC Label         : 294930
     Remote VC Label        : 294929
     PW Type                : label
-    Tunnel ID              : 0x000000000300000002 
+    Tunnel ID              : 0x000000000300000002
     Broadcast Tunnel ID    : --
     Broad BackupTunnel ID  : --
     Ckey                   : 95874
@@ -657,7 +657,7 @@ SiteID     RD                      PeerAddr         InLabel   OutLabel  VCState
 Ничего не мешает нам запустить icmp между любыми PC, но сделаем это позже. Посмотрим, каким LSP пойдет трафик:
 
 ```
-<agg-3>display vsi pw out-interface 
+<agg-3>display vsi pw out-interface
 Total: 1
 --------------------------------------------------------------------------------
 Vsi Name                        peer            vcid       interface

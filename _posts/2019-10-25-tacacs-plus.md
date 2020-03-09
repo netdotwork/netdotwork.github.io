@@ -2,7 +2,7 @@
 layout: post
 title: Tacacs + LDAP + huawei
 summary:  Настроим TACACS+, аутентификацию через ldap, авторизацию и аккаунтинг. На Ubuntu Server 19.04, а в качестве сетевого будет Huawei (S, NE, CX, ATN, Eudemon (USG)).
-featured-img: kittyonkeyboard
+featured-img:
 categories: Linux Networking
 tags: [ huawei, tacacs+ ]
 ---
@@ -661,8 +661,8 @@ ExecReload=/etc/init.d/tac_plus reload
 
 ```
 ### BEGIN INIT INFO
- # Default-Start: 2 3 4 5 
- # Default-Stop: 0 1 6 
+ # Default-Start: 2 3 4 5
+ # Default-Stop: 0 1 6
 ### END INIT INFO
 ```
 
@@ -830,7 +830,7 @@ authentication-scheme default
   authentication-mode local hwtacacs
 q
 authentication-scheme hwtacacs_scheme
-  authentication-mode hwtacacs local 
+  authentication-mode hwtacacs local
 q
  authorization-scheme hwtacacs_nxtt
   authorization-mode hwtacacs local
@@ -916,7 +916,7 @@ hwtacacs-server template <hwtacacs_template_name>
  hwtacacs-server accounting <X.X.X.X>
  hwtacacs-server source-ip <your_loopback>
  hwtacacs-server shared-key cipher <your_hwtacacs_key>
-q 
+q
 aaa
  authentication-scheme <your_hwtacacs_scheme>
   authentication-mode hwtacacs local
@@ -941,18 +941,18 @@ cmd recording-scheme <your_hwtacacs_scheme>
   service-type administrator-access
   reference user current-domain
   new-user deny-authentication
-q 
+q
   manager-user user1
   level 15
   service-type ssh terminal web
   authentication-scheme <your_hwtacacs_scheme>
-  hwtacacs-server <hwtacacs_template_name> 
+  hwtacacs-server <hwtacacs_template_name>
   q
    manager-user user2
   level 15
   service-type ssh terminal web
   authentication-scheme <your_hwtacacs_scheme>
-  hwtacacs-server <hwtacacs_template_name> 
+  hwtacacs-server <hwtacacs_template_name>
   q
   bind manager-user user1 role system-admin
   bind manager-user user2 role system-admin

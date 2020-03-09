@@ -2,7 +2,7 @@
 layout: post
 title: Napalm + netbox
 summary: Очень добрый инструмент учета, netbox, можно сделать еще добрее. Сегодня прикрутим napalm driver к netbox и соберем данные с оборудования huawei.
-featured-img: typewriter
+featured-img:
 categories: Other Networking Code
 tags: [ netbox, napalm ]
 ---
@@ -14,9 +14,9 @@ https://github.com/netbox-community
 В netbox есть REST API, т.е. хранимую в нем информацию можно забирать, обрабатывать и складывать обратно. Все это + аутентификацию на сетевых устройствах, netbox может выполнять с помощью библиотеки napalm.
 
 Установим napalm на сервер с netbox.
-Для начала выберем нужный драйвер. 
+Для начала выберем нужный драйвер.
 Есть официальная страница - https://napalm-automation.net/, здесь же, в самом низу, ссылка на гитхаб - https://github.com/napalm-automation с библиотеками под разные ОС. Но здесь только то, что поддерживается официально. Перечень таких девайсов можно ещё и здесь найти - https://napalm.readthedocs.io/en/latest/support/. Huawei нет :(
-Посмотрим гитхаб коммьюнити - https://github.com/napalm-automation-community. 
+Посмотрим гитхаб коммьюнити - https://github.com/napalm-automation-community.
 Дело в том, что сам драйвер представляет из себя универсальный API для управления "коробками" любых вендоров. А как управлять - решаете сами. Например, хотите написать парсер для чего-то своего или добавить новый метод, переписываете только одну библиотеку в директории custom_napalm. Вот здесь подробнее - https://napalm.readthedocs.io/en/latest/tutorials/extend_driver.html.
 
 Итак, на странице коммьюнити есть почти то, что нужно - [napalm_ce](https://github.com/napalm-automation-community/napalm-ce){:target="_blank"}. Это драйвер для huawei cloudengine. Установим согласно инструкции, проверим на девайсах серий S и NE. Актуально и для других серий (CX, Eudemon, USG):
