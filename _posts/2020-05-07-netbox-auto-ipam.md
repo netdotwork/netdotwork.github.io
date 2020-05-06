@@ -20,8 +20,8 @@ Netmiko поддерживает большое число [платформ](ht
 
 Одна из задач для нашего инструмента - возможность работы с планировщиком. Т.е. уже добавленные в БД NetBox данные должны быть перепроверены и исправлены при необходимости.
 
-Инструмент и подробный readme [здесь](https://github.com/netdotwork/netbox_resolver){:target="_blank"}
-Пока работает только с Huawei VRP.
+Инструмент и подробный `README` [здесь](https://github.com/netdotwork/netbox_resolver){:target="_blank"}
+Пока работает только с `Huawei VRP`.
 
 В этом топике добавим наш autoIPAM/DCIM инструмент в cron.
 
@@ -29,7 +29,7 @@ Netmiko поддерживает большое число [платформ](ht
 - [так](https://github.com/netdotwork/pyneng-my-exercises/blob/master/virtualenv_python.md){:target="_blank"}
 - [или так](https://pyneng.github.io/docs/venv/){:target="_blank"}
 
-Подготовим yaml-конфигуратор с набором параметров. Например, devices.yaml:
+Подготовим yaml-конфигуратор с набором параметров. Например, `devices.yaml`:
 
 ```
 - netbox: http://netbox_domain_name_or_ip/
