@@ -13,7 +13,9 @@ tags: [ python, bash, netbox ]
 Хорошая и надежная идея - собирать данные с устройств и добавлять в БД вашего IPAM/DCIM. Не самим, а написать для этого инструмент.
 
 Используем [NetBox](https://github.com/netbox-community/netbox){:target="_blank"} в качестве IPAM/DCIM + [Pynetbox](https://github.com/digitalocean/pynetbox){:target="_blank"}.
+
 Подключаться к устройствам будем по ssh, с помощью [netmiko](https://github.com/ktbyers/netmiko){:target="_blank"}.
+
 Netmiko поддерживает большое число [платформ](https://ktbyers.github.io/netmiko/PLATFORMS.html){:target="_blank"} и легко [интегрируется с TextFSM](https://pynet.twb-tech.com/blog/automation/netmiko-textfsm.html){:target="_blank"}, что полезно для CLI-устройств.
 
 Сетевые устройства хранят самую актуальную информацию, но сбор данных с большого числа таких устройств занимает много времени. Ускорить можно, использовав потоки, модули concurrent.futures и threading.
@@ -23,6 +25,8 @@ Netmiko поддерживает большое число [платформ](ht
 Инструмент и подробный `README` [здесь](https://github.com/netdotwork/netbox_resolver){:target="_blank"}
 
 Пока работает только с `Huawei VRP`.
+
+- - -
 
 
 В этом топике добавим наш autoIPAM/DCIM инструмент в cron.
