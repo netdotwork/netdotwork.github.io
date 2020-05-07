@@ -20,7 +20,7 @@ Netmiko поддерживает большое число [платформ](ht
 Это не быстро, но можно использовать потоки, с помощью concurrent.futures и threading.
 
 Что касается способов работы с API NetBox, то можно воспользоваться [SDK Pynetbox](https://github.com/digitalocean/pynetbox){:target="_blank"}.
-Получить список endpoint'ов при этом не составит труда, NetBox имеет специфицированный API  - [подробнее](https://linkmeup.ru/blog/530.html#POSTMAN){:target="_blank"}.
+Получить список endpoint'ов при этом не составит труда, NetBox имеет специфицированный API  - [подробнее](https://linkmeup.ru/blog/530.html#WAYS){:target="_blank"}.
 
 Готовый инструмент с подробным `README` [здесь](https://github.com/netdotwork/netbox_resolver){:target="_blank"}.
 В списке поддерживаемых платформ пока только `Huawei VRP`.
