@@ -6,30 +6,27 @@ featured-img:
 categories: Linux Networking Code Management
 tags: [ python, bash, netbox ]
 ---
+Сложно поддерживать IPAM [NetBox](https://github.com/netbox-community/netbox){:target="_blank"} в актуальном состоянии, если вы делаете это сами, вручную.
+А если потребности не ограничены IPAM и вы пытаетесь держать в порядке DCIM NetBox?
 
-Сложно поддерживать IPAM в актуальном состоянии, если вы делаете это сами, вручную.
-А если потребности не ограничены IPAM?
+Нужен инструмент, который будет:
+- собирать данные и добавлять в БД NetBox
+- проверять ранее добавленные в БД NetBox данные и исправлять при необходимости
+- работать с планировщиком
 
-Хорошая и надежная идея - собирать данные с устройств и добавлять в БД вашего IPAM/DCIM. Не самим, а написать для этого инструмент.
-
-Используем [NetBox](https://github.com/netbox-community/netbox){:target="_blank"} в качестве IPAM/DCIM + [Pynetbox](https://github.com/digitalocean/pynetbox){:target="_blank"}.
-
-Подключаться к устройствам будем по ssh, с помощью [netmiko](https://github.com/ktbyers/netmiko){:target="_blank"}.
-
+Данные можно собирать с самих сетевых устройств, с помощью [netmiko](https://github.com/ktbyers/netmiko){:target="_blank"}.
 Netmiko поддерживает большое число [платформ](https://ktbyers.github.io/netmiko/PLATFORMS.html){:target="_blank"} и легко [интегрируется с TextFSM](https://pynet.twb-tech.com/blog/automation/netmiko-textfsm.html){:target="_blank"}, что полезно для CLI-устройств.
 
-Сетевые устройства хранят самую актуальную информацию, но сбор данных с большого числа таких устройств занимает много времени. Ускорить можно, использовав потоки, модули concurrent.futures и threading.
+Это не быстро, но можно использовать потоки, с помощью concurrent.futures и threading.
 
-Одна из задач для нашего инструмента - возможность работы с планировщиком. Т.е. уже добавленные в БД NetBox данные должны быть перепроверены и исправлены при необходимости.
+Что касается способов работы с API NetBox, то можно воспользоваться [SDK Pynetbox](https://github.com/digitalocean/pynetbox){:target="_blank"}.
+Получить список endpoint'ов при этом не составит труда, NetBox имеет специфицированный API,  - [подробнее](https://linkmeup.ru/blog/530.html#POSTMAN){:target="_blank"}.
 
-Инструмент и подробный `README` [здесь](https://github.com/netdotwork/netbox_resolver){:target="_blank"}
-
-Пока работает только с `Huawei VRP`.
+Готовый инструмент с подробным `README` [здесь](https://github.com/netdotwork/netbox_resolver){:target="_blank"}.
+В списке поддерживаемых платформ пока только `Huawei VRP`.
+Осталось закрыть вопрос с планировщиком.
 
 - - -
-
-
-В этом топике добавим наш autoIPAM/DCIM инструмент в cron.
 
 Нам потребуется Python 3.7 - установим в виртуальном окружении:
 - [так](https://github.com/netdotwork/pyneng-my-exercises/blob/master/virtualenv_python.md){:target="_blank"}
