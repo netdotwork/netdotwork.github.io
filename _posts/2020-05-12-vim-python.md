@@ -365,7 +365,7 @@ syntax on
 
 ### Color Schemes Switching
 
-у меня много схем оформления vim и возможность переключения между ними по `<F8>`.
+У меня много схем оформления vim и возможность переключения между ними по `<F8>`.
 
 Для начала скопируем в `~/.vim/colors/` схемы оформления. Возьмем их, например, [здесь](https://github.com/rainglow/vim){:target="_blank"} и [здесь](https://github.com/rafi/awesome-vim-colorschemes){:target="_blank"}.
 
