@@ -699,7 +699,7 @@ vim new_file.txt
 
 ## Resources
 
-1. [Источник, на который опирается данная статья](https://realpython.com/vim-and-python-a-match-made-in-heaven/#vim-extensions){:target="_blank"}
+1. [Основной источник этой статьи](https://realpython.com/vim-and-python-a-match-made-in-heaven/#vim-extensions){:target="_blank"}
 2. [Лекции по основам vim](https://www.youtube.com/playlist?list=PLah0HUih_ZRkiQXDuElo_JW9OfmbEXRpj){:target="_blank"}
 3. [Mapping keys](https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)){:target="_blank"}
 4. [Using tab pages](https://vim.fandom.com/wiki/Using_tab_pages){:target="_blank"}
