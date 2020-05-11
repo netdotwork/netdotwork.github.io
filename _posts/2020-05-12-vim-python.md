@@ -310,7 +310,7 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 ```
 
-Но это не всё. Если у вас уже есть виртуальные окружение, то переключаться между ними можно внутри vim, с помощью плагина [vim-virtualenv](https://github.com/jmcantrell/vim-virtualenv){:target="_blank"}.
+Но это не всё. Если у вас уже есть виртуальные окружения, то переключаться между ними можно внутри vim, с помощью плагина [vim-virtualenv](https://github.com/jmcantrell/vim-virtualenv){:target="_blank"}.
 
 Установим через Vundle:
 
