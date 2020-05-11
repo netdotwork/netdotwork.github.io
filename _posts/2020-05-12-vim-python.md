@@ -66,6 +66,7 @@ VIM - Vi IMproved 8.2 (2019 Dec 12, собрано Apr 14 2020 16:54:38)
 **Если vim не установлен, установим:**
 
 `sudo apt update`
+
 `sudo apt install vim`
 
 **Если vim установлен, но не поддерживает python3, собираем из исходников:**
@@ -157,7 +158,7 @@ filetype plugin indent on    " required
 
 `Plugin 'jistr/vim-nerdtree-tabs'`
 
-устанавливаем
+Устанавливаем
 
 `:PluginInstall`
 
@@ -435,9 +436,7 @@ vim-airline интегрируется со многими плагинами, �
 let g:airline_section_b = '%{FugitiveStatusline()}'
 ```
 
-
 Для работы с git есть плагин [vimagit](https://github.com/jreybert/vimagit), но мне он кажется менее удобным.
-
 
 ### Line Numbering
 
@@ -520,7 +519,6 @@ set switchbuf=usetab
 nnoremap <F7> :sbnext<CR>
 nnoremap <S-F7> :sbprevious<CR>
 ```
-
 
 ### History
 
