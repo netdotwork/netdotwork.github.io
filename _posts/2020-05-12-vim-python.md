@@ -364,7 +364,7 @@ let python_highlight_all=1
 syntax on
 ```
 
-### Switch Color Schemes
+### Color Schemes Switching
 
 у меня много схем оформления vim и возможность переключения между ними по `<F8>`.
 
@@ -378,7 +378,7 @@ syntax on
 
 `:SetColors all`
 
-Добавим возможность переключения по <F8>, скопировав [этот скрипт](https://vim.fandom.com/wiki/Switch_color_schemes){:target="_blank"} в ~/.vim/plugin/setcolors.vim
+Добавим возможность переключения по `<F8>`, скопировав [этот скрипт](https://vim.fandom.com/wiki/Switch_color_schemes){:target="_blank"} в ~/.vim/plugin/setcolors.vim
 
 Чтобы отобразить текущую схему, можно использовать `:SetColors`.
 
