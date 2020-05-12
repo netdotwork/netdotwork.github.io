@@ -146,7 +146,11 @@ filetype plugin indent on    " required
 
 Например, [NERDTree](https://github.com/preservim/nerdtree){:target="_blank"}, **file browsing** плагин - открывает в отдельном вертикальном split'е дерево файлов и директорий.
 
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/nerdtree.png)
+
 Достаточно добавить `Plugin 'scrooloose/nerdtree'` между строками `call vundle#begin()` и `call vundle#end()` (там, где написано `the place for other plugins`) и выполнить `:PluginInstall`
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/plugin_install.png)
 
 При установке появится окно установщика и `+` напротив установленного плагина.
 
@@ -169,6 +173,9 @@ filetype plugin indent on    " required
 
 `vim +PluginInstall` или `vim +PluginList`
 
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/vim_plugin_list.png)
+
+
 ### Key combinations
 
 Надо, надо, ребята, потратить свое время на изучение. Свои основные кнопки написал в самом низу страницы.
@@ -177,6 +184,9 @@ filetype plugin indent on    " required
 ### Split Layouts
 
 Можно открывать файлы в вертикальном и горизонтальном сплитах, а в этих сплитах открывать новые сплиты.
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/splits.png)
+
 Настроим зоны для новых сплитов (новые вертикальные будут открываться справа, горизонтальные - внизу):
 
 ```
@@ -206,7 +216,11 @@ nnoremap переназначает одну комбинацию клавиш �
 
 ### Code Folding
 
-Полезная фича - сворачивание кода. Сворачивает до ближайшего whitespace на основе отступов (foldmethod=indent). Добавляем в наш .vimrc:
+Полезная фича - сворачивание кода. Сворачивает до ближайшего whitespace на основе отступов (foldmethod=indent). Выглядит как-то так:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/code_folding.png)
+
+Добавляем в наш .vimrc:
 
 ```
 " Enable folding
@@ -261,6 +275,8 @@ highlight BadWhitespace ctermbg=red guibg=red
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 ```
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/red_whitespaces.png)
 
 Чтобы удалить найденные пробелы можно воспользоваться заменой: 
 
@@ -322,6 +338,8 @@ EOF
 Теперь, запустим виртуальное окружение:
 
 `:VirtualEnvActivate <tab>`
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/virtualenv.png)
 
 Деактивируем:
 
@@ -415,6 +433,10 @@ let g:airline_theme='minimalist'
 let g:airline_section_y = '%{virtualenv#statusline()}'
 ```
 
+Теперь, vim будет выглядеть так:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/vim_airline.png)
+
 vim-airline интегрируется со многими плагинами, например, с `ctrlP`, который мы уже установили.
 
 В vim-airline можно добавить, например, наименование используемого виртуального окружения, что мы и сделали.
@@ -436,7 +458,9 @@ vim-airline интегрируется со многими плагинами, �
 let g:airline_section_b = '%{FugitiveStatusline()}'
 ```
 
-Для работы с git есть плагин [vimagit](https://github.com/jreybert/vimagit), но мне он кажется менее удобным.
+Для работы с git есть плагин [vimagit](https://github.com/jreybert/vimagit){:target="_blank"}, но мне он кажется менее удобным.
+
+Для отображения статуса git-репозитория в NERDTree попробуйте [этот плагин](https://github.com/Xuyuanp/nerdtree-git-plugin){:target="_blank"}
 
 ### Line Numbering
 
@@ -505,6 +529,20 @@ nnoremap <silent> <C-Down> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <C-Up> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 ```
+
+```
+Ctrl+Left - переключить на предыдущую вкладку
+Ctrl+Right - переключить на следуюущую вкладку
+
+Alt+Left - переместить вкладку назад
+Alt+Right - переместить вкладку вперед
+
+```
+
+Вкладки в vim:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/tabs.png)
+
 
 ### Switching Buffers
 
