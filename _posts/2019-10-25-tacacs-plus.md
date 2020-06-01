@@ -876,7 +876,7 @@ authentication-scheme default
   authentication-mode local hwtacacs
 q
 authentication-scheme <your_hwtacacs_scheme>
-  authentication-mode hwtacacs localhwtacacs_nxtt
+  authentication-mode hwtacacs local
 q
  authorization-scheme hwtacacs_nxtt
   authorization-mode hwtacacs local
