@@ -293,15 +293,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 set encoding=utf-8
 ```
 
-### Auto-Complete
-
-Я не пользуюсь автодополнением, но, вот хороший плагин - [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe){:target="_blank"}
-
-Не буду дублировать [инструкцию по установке](https://github.com/ycm-core/YouCompleteMe#linux-64-bit){:target="_blank"}
-
-Для решения проблем с плагином, как правило, предлагают этот [рецепт](https://github.com/ycm-core/YouCompleteMe/issues/2271){:target="_blank"}.
-
-
 ### Virtualenv Support
 
 То, что вам обязательно нужно - виртуальные окружения.
@@ -310,9 +301,9 @@ set encoding=utf-8
 - [тык](https://github.com/netdotwork/pyneng-my-exercises/blob/master/virtualenv_python.md){:target="_blank"}
 - [тык](https://pyneng.github.io/docs/venv/){:target="_blank"}
 
-По умолчанию, Vim и YouCompleteMe не знают ничего об используемом виртуальном окружении.
+По умолчанию, Vim ничего не знает об используемом виртуальном окружении.
 
-Чтобы все было хорошо, добавим в .vimrc:
+Чтобы все было хорошо, и при запуске vim подхватывал то окрежние, в котором вы находитесь, добавим в .vimrc:
 
 ```
 " python with virtualenv support
@@ -322,11 +313,12 @@ import sys
 if 'VIRTUAL_ENV' in os.environ:
   project_base_dir = os.environ['VIRTUAL_ENV']
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
+  #execfile(activate_this, dict(__file__=activate_this)) # устарел execfile
+  exec(open(activate_this).read(), dict(__file__=activate_this))
 EOF
 ```
 
-Но это не всё. Если у вас уже есть виртуальные окружения, то переключаться между ними можно внутри vim, с помощью плагина [vim-virtualenv](https://github.com/jmcantrell/vim-virtualenv){:target="_blank"}.
+Но это не всё. Если у вас уже есть виртуальные окружения, то переключаться между ними можно внутри vim, вручную, с помощью плагина [vim-virtualenv](https://github.com/jmcantrell/vim-virtualenv){:target="_blank"}.
 
 Установим через Vundle:
 
@@ -343,6 +335,123 @@ EOF
 Деактивируем:
 
 `:VirtualEnvDeactivate`
+
+### Auto-Complete
+
+С недавних пор пользуюсь автодополнением. 
+
+Использование плагина [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe){:target="_blank"} не принесло мне много радости. Но это субъективно.
+
+[Тут инструкция по установке](https://github.com/ycm-core/YouCompleteMe#linux-64-bit){:target="_blank"}
+
+Есть проблемы и для решения, как правило, предлагают этот [рецепт](https://github.com/ycm-core/YouCompleteMe/issues/2271){:target="_blank"}.
+
+По душе мне пришелся [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim){:target="_blank"}.
+
+Он универсален, работает как с `Jedi`, так и с `Microsoft PLS` (и то, и другое - это Language Server, еще поговорим об этом).
+Умеет в IDE capabilities, например, покажет вам аннотации типов или `__doc__` объекта.
+Удобно настраивать, опций - огромное множество.
+
+Установим.
+
+Сперва, [Jedi](https://jedi.readthedocs.io/en/latest/docs/installation.html){:target="_blank"} или [Jedi](https://github.com/davidhalter/jedi){:target="_blank"}.
+
+`Jedi` - это Language Server, фоновый процесс, который будет анализировать наш код. С помощью `coc.nvim`, будем просить его дополнить код, выполнить форматирование или рефакторинг.
+[Здесь](https://www.vimfromscratch.com/articles/vim-and-language-server-protocol/){:target="_blank"} хорошо и кратко про `Language Server Protocol (LSP)`.
+
+Вариантов установки много, ставим через `pip` в нужном виртуальном окружении ([про установку виртуальных окружений](https://github.com/netdotwork/pyneng-my-exercises/blob/master/virtualenv_python.md){:target="_blank"}, а еще чуть выше, в Virtualenv Support):
+
+```python
+workon 3.8.4 # переключаемся в виртуальное окружение (у меня 3.8.4)
+pip install jedi # или любой другой из предложенных вариантов
+```
+
+Кстати, там же, в документации, есть ссылка на клиент для `Jedi` - [JEDI-VIM](https://github.com/davidhalter/jedi-vim){:target="_blank"}. Можете попробовать как альтернативу `coc.nvim`.
+
+Теперь установим [coc](https://github.com/neoclide/coc.nvim){:target="_blank"} по [инструкции из Wiki](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim){:target="_blank"}. У нас, конечно, же vim 8 (проверить можно через `vim --version`), поэтому воспользуемся встроенный пакетным менеджером:
+
+```python
+# for vim8
+mkdir -p ~/.vim/pack/coc/start
+cd ~/.vim/pack/coc/start
+curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
+```
+
+Здесь же, в `.vimrc`, с помощью встроенного менеджера, установим `coc-python`:
+
+```
+:CocInstall coc-python
+```
+
+Откроем какой-нибудь скрипт, и, поскольку мы уже в нужном виртуальном окружении(настроили раньше, в Virtualenv Support), переключим интерпретатор на работу с `Jedi` в этом же окружении.
+Делается это снова встроенным менеджером:
+
+```
+:CocCommand
+# здесь мы должны выбрать то, виртуальное окружение, куда ранее установили Jedi
+# опция будет постоянной и при работе в другом виртуальном окружении, желателательно снова переключиться
+
+python.setInterpreter
+```
+
+В появившемся окне выбираем виртуальное окружение, куда ранее установили `Jedi`. Вот в картинках, до момента выбора окружения:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/coccommand.png)
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/setinterpreter.png)
+
+С помощью `CocCommand` можно настраивать много всего. Фактически, мы правим конфигурационный файл через интерфейс встроенного менеджера.
+
+Посмотрим на интерфейс на примере функции `print`:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/completion.png)
+
+Если `coc.nvim` нужно отключить:
+
+```
+:CocDisable
+```
+
+Включаем обратно:
+
+```
+:CocEnable
+```
+
+Теперь добавим полезного в наш `.vimrc` для работы с `coc`:
+
+```
+vim ~/.vimrc # открываем
+let mapleader = "," # назначим лидер-кнопку, она пригодится
+
+# настроим отображение документации:
+
+nmap <silent> gd <Plug>(coc-definition)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+```
+Смотрим, как это выглядит (ставим курсор на `print`, жмем `K`):
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/docstring.png)
+
+Добавим аннотации в `~/.vimrc`:
+
+```python
+nmap <silent> gd <Plug>(coc-definition)
+```
+
+Смотрим на том же примере (ставим курсор на `print`, жмем `gd`):
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/gd.png)
+
+У проекта отличная [Wiki](https://github.com/neoclide/coc.nvim/wiki){:target="_blank"}, если вдруг.
 
 ### File Browsing
 
@@ -380,6 +489,76 @@ map <F3> :NERDTreeToggle<CR>
 let python_highlight_all=1
 syntax on
 ```
+
+### Поддержка markdown
+
+Ну, а почему нет?
+
+Подсветка синтаксиса, превью - все, что нужно.
+
+Смотрим топ плагинов [здесь](https://vimawesome.com/?q=markdown){:target="_blank"}.
+
+Хорошие - [Vim Markdown](https://github.com/plasticboy/vim-markdown){:target="_blank"} и [vim-instant-markdown](https://github.com/suan/vim-instant-markdown){:target="_blank"} как превью.
+
+Устанавливаем уже знакомым способом, через `Vundle`:
+
+```
+vim ~/.vimrc
+
+# добавляем
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'} "markdown preview plugin - https://github.com/suan/vim-instant-markdown
+Plugin 'godlygeek/tabular' "for work with markdown plugin (Ctrl-p) - https://github.com/godlygeek/tabular
+Plugin 'plasticboy/vim-markdown' " best markdown plugin - https://github.com/plasticboy/vim-markdown
+
+# запускаем Vundle
+:PluginInstall
+```
+
+Добавим для `vim-instant-markdown` доступные настройки в наш `~/.vimrc`:
+
+```
+filetype plugin on
+"Uncomment to override defaults:
+"let g:instant_markdown_slow = 1
+"let g:instant_markdown_autostart = 0
+"let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_allow_unsafe_content = 1
+"let g:instant_markdown_allow_external_content = 0
+"let g:instant_markdown_mathjax = 1
+"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+"let g:instant_markdown_autoscroll = 0
+"let g:instant_markdown_port = 8888
+"let g:instant_markdown_python = 1
+```
+
+А для `vim-markdown` добавим подсветку YAML, JSON, разрешим открывать ссылки на `.md` в новых вкладках:
+
+```
+" vim markdown plugin options - https://github.com/plasticboy/vim-markdown
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_edit_url_in = 'tab'
+
+```
+
+Ну и для удобства настроим отсупы аналогично Python indentation. Мы уже делали это ранее, теперь только добавим `*md` и `*markdown`:
+
+```
+au BufRead,BufNewFile *.py,*pyw,*md,*markdown set tabstop=4
+au BufRead,BufNewFile *.py,*pyw,*md,*markdown set softtabstop=4
+au BufRead,BufNewFile *.py,*pyw,*md,*markdown set autoindent
+au BufRead,BufNewFile *.py,*pyw,*md,*markdown set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw,*md,*markdown set expandtab
+```
+
+Например, теперь, помимо подсветки, можно открыть в отдельном сплите все заголовки вашего markdown-файла и переключаться между ними:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/vimmarkdowncommands.png)
+
+А превью будет сразу открываться как новая вкладка в браузере:
+
+![]({{ site.url }}{{ site.baseurl }}/assets/img/posts/vimrc/preview.png)
+
 
 ### Color Schemes Switching
 
@@ -735,7 +914,9 @@ vim new_file.txt
 ## Resources
 
 1. [Основной источник этой статьи](https://realpython.com/vim-and-python-a-match-made-in-heaven/#vim-extensions){:target="_blank"}
-2. [Лекции по основам vim](https://www.youtube.com/playlist?list=PLah0HUih_ZRkiQXDuElo_JW9OfmbEXRpj){:target="_blank"}
-3. [Mapping keys](https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)){:target="_blank"}
-4. [Using tab pages](https://vim.fandom.com/wiki/Using_tab_pages){:target="_blank"}
-5. [Отличный сборник плагинов для vim](https://vimawesome.com/){:target="_blank"}
+2. [Второй источник этой статьи](https://www.vimfromscratch.com/articles/vim-for-python/){:target="_blank"}
+3. [Vim and Language Server Protocol](https://www.vimfromscratch.com/articles/vim-and-language-server-protocol/){:target="_blank"}
+4. [Лекции по основам vim](https://www.youtube.com/playlist?list=PLah0HUih_ZRkiQXDuElo_JW9OfmbEXRpj){:target="_blank"}
+5. [Mapping keys](https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)){:target="_blank"}
+6. [Using tab pages](https://vim.fandom.com/wiki/Using_tab_pages){:target="_blank"}
+7. [Отличный сборник плагинов для vim](https://vimawesome.com/){:target="_blank"}
